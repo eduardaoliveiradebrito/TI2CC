@@ -17,11 +17,13 @@ public static void main(String[] args) {
 		int opcao = 0;
 		System.out.println("Escolha uma opção: \n 1 - Listar \n 2 - Inserir \n "
 				+ "3 - Excluir \n 4 - Atualizar \n 5 - Sair \n");
-		Ator [] ators = dao.getAtor();
-		int tamanhoLista = ators.length;
+
 		Ator ator;
+		int j = 0;
 		
 		while(opcao != 5) {
+			Ator [] ators = dao.getAtor();
+			int tamanhoLista = ators.length+1+j;
 			opcao = sc.nextInt();
 			//listar atores
 			if(opcao == 1) {
@@ -40,7 +42,7 @@ public static void main(String[] args) {
 				System.out.println("Informe o sexo do ator:");
 				String aux = sc.nextLine();
 				char sexo = aux.charAt(0);
-				ator = new Ator(tamanhoLista+1, nm, filme, sexo);
+				ator = new Ator(tamanhoLista, nm, filme, sexo);
 				if(dao.inserirAtor(ator) == true) {
 					System.out.println("Inserção com sucesso -> " + ator.toString());				
 				}
@@ -50,6 +52,7 @@ public static void main(String[] args) {
 				System.out.println("Informe o codigo do ator que deseja excluir:");
 				int cod = sc.nextInt();
 				dao.excluirAtor(cod);
+				j++; //contar quantos foram excluidos
 			}
 			//atualizar ator
 			if(opcao == 4) {
